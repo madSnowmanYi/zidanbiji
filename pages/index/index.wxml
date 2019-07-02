@@ -1,0 +1,31 @@
+<!-- 加载好了才显示 -->
+<view wx:if="{{start}}">
+<view bindtap='changeSubject' class='subject'>
+<image class='avatar'src='{{avatarUrl}}'></image>
+  <view class='subject1' >{{current_grade+current_subject}}</view>
+</view>
+<view style='width:100vw;height:50vh;position: relative;'>
+  <view bindtap='paizhao' class='paizhao'>
+    <image style='width:20vw;height:20vw;position: absolute; margin-top:5vw; margin-left:10vw;' src='../pic/xianpaizhao.png' mode='aspectFit'>
+    </image>
+    <view style='font-size:32;font-weight:bold;color:white; margin-top:25vw; margin-left:10.5vw;'>拍照存题</view>
+  </view>
+</view>
+<!-- <view class='line'></view> -->
+<view style='width:100vw;height:10vh;display:flex;justify-content:center'>
+  <view class='num'>{{wodetiliang}}</view>
+  <view class='num'>{{beishoucangshu}}</view>
+  <view class='num'>{{zaixianshichang}}</view>
+  <view class='num'>{{wodejinbi}}</view>
+</view>
+<view style='width:100vw;height:5vh;display:flex;justify-content:center'>
+  <view class='num_xiao'>我的题量</view>
+  <view class='num_xiao'>被收藏数</view>
+  <view class='num_xiao'>在线时长/分</view>
+  <view class='num_xiao'>我的金币</view>
+</view>
+<view style='width:100vw;height:25vh;display: flex; justify-content: center;  align-items: center;'>
+  <view bindtap='wodetiku' class='wodetiku'>
+    我的题库
+  </view>
+</view></view>

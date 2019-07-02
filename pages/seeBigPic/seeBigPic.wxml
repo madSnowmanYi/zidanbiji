@@ -1,0 +1,2 @@
+<!--pages/seeBigPic/seeBigPic.wxml-->
+<image mode="aspectFit" bindtap='back'bindlongpress='delQues' mode='aspectFit' src='{{pic}}' style='width:100%;height:100%'></image>

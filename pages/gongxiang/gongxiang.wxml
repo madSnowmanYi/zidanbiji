@@ -1,0 +1,28 @@
+<view class="content">
+  <!--头部tab切换部分start-->
+  <view class="menu">
+    <view class="{{currentTab==index?'select':'default'}}" wx:for="{{switchtab}}" wx:key='' data-current="{{index}}" catchtap="switchNav">{{item.name}}</view>
+  </view>
+  <view class="explain-box">
+    <text class="explain">说明</text>
+    <text class="iconfont icon-wenhao"></text>
+  </view>
+  <!--头部tab切换部分end-->
+  <!--切换内容部分start-->
+  <swiper current='{{currentTab}}' bindchange="tabChange" class='mySwiper'>
+
+
+    <block>
+      <swiper-item>
+        <view>test0</view>
+      </swiper-item>
+    </block>
+    <block>
+      <swiper-item>
+        <view>test1</view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--切换内容部分end-->
+</view>
+<button bindtap='lianjiefuwuqi'>点击测试连接</button>

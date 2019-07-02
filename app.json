@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/xiaotiku/xiaotiku",
+    "pages/subject/subject",
+    "pages/paizhao/paizhao",
+    "pages/upload/upload",
+    "pages/gongxiang/gongxiang",
+    "pages/jibiji/jibiji",
+    "pages/qiuzhu/qiuzhu",
+    "pages/wode/wode",
+    "pages/seeBigPic/seeBigPic",
+    "pages/authorize/authorize"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarTitleText": "小题库",
+    "enablePullDownRefresh": false,
+    "navigationBarBackgroundColor": "#11cd6e"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "pages/pic/xiaotiku.png",
+        "iconPath": "pages/pic/tiku1.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "pages/pic/paihang.png",
+        "iconPath": "pages/pic/paihang1.png",
+        "pagePath": "pages/gongxiang/gongxiang",
+        "text": "共享题库"
+      },
+      {
+        "selectedIconPath": "pages/pic/luru.png",
+        "iconPath": "pages/pic/luru1.png",
+        "pagePath": "pages/jibiji/jibiji",
+        "text": "记笔记"
+      },
+      {
+        "selectedIconPath": "pages/pic/wode.png",
+        "iconPath": "pages/pic/wode1.png",
+        "pagePath": "pages/wode/wode",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

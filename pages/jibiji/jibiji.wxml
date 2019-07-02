@@ -1,0 +1,119 @@
+
+<view class="content">
+  <!--头部tab切换部分start-->
+  <view class="menu" style='position:fixed'>
+    <view class="{{currentTab==index?'select':'default'}}" wx:for="{{switchtab}}" wx:key='' data-current="{{index}}" catchtap="switchNav">{{item.name}}</view>
+  </view>
+
+  <!--头部tab切换部分end-->
+  <!--切换内容部分start-->
+  <swiper duration='300' style='height:100vh;' current='{{currentTab}}' bindchange="tabChange">
+
+    <block>
+      <swiper-item style='overflow: scroll;margin-top:88rpx'>
+        <scroll-view style='height:100vh' scroll-y='true' scroll-top="99999"upper-threshold='0' >
+          <!-- <view style='height:10vh;width:96vw;background-color:red;margin-left:2vw'></view> -->
+          <view wx:if="{{location==null}}" class='timu-add' bindtap='takePhoto' data-type='ques'>
+            <text class='timu-add-icon'>+</text>
+            <text>点击拍摄题目</text>
+          </view>
+          <view wx:if="{{location!=null}}">
+            <view style='font-size:14px;font-weight:bold;margin-left:5vw;margin-top:3vh;color:gray'>题号:9527</view>
+            <!-- 题目图片 -->
+            <view class="line">
+              <span>题目区</span>
+            </view>
+            <image bindload="imageLoad" style="width:{{quesImgWidth}}rpx; height:{{quesImgHeight}}rpx;" class='quesBox' bindtap='seeBigImg' bindlongpress="delQues" wx:if="{{location!=null}}" src="{{location}}" mode='scaleToFill'>
+            </image>
+
+            <!-- 选择题型和知识点 -->
+            <!-- <view>
+            
+              <picker-view class="picker" indicator-class="indicator" value="{{value}}" bindchange="bindChangePicker">
+                <picker-view-column class="column">
+                  <view wx:for="{{quesTypes}}">{{item}}</view>
+                </picker-view-column>
+                <picker-view-column class="column">
+                  <view wx:for="{{knowdgePoints}}">{{item}}</view>
+                </picker-view-column>
+              </picker-view>         
+            </view> -->
+            <view class="line">
+              <span>以下为答案内容</span>
+            </view>
+            <!-- 答案 -->
+            <view class="daan" wx:if="{{quesInfo[1].answer!==null}}">
+              <view wx:for="{{quesInfo[1].answer}}" wx:key="{{index}}">
+
+                <!-- 如果ansType是img，则显示图片格式 -->
+                <view wx:if="{{(item.ansType=='img'&&(itemDaan.ansLocal!==''))}}">
+                  <view style='margin-bottom:2vh;right:0vw;'>
+                    <image  style='border-radius: 1vw;' src='{{item.ansLocal}}' mode='widthFix'></image>
+                    <!-- <view style='width:100vw;height:4vw;background-color-white;'></view> -->
+                  </view>
+                </view>
+                <!-- 如果type是wenzi，则显示文字格式 -->
+                <view wx:if="{{(itemDaan.type=='wenzi')}}" style='text-align:right;' class="bubble">
+
+                  <view class="content">{{itemDaan.src}}
+                  </view>
+                  <!-- </view> -->
+                  <view style='width:90vw;height:4vw;background-color-white; '></view>
+                </view>
+              </view>
+            </view>
+            <!-- //点击显示图标 -->
+            <!-- <view wx:if="{{location!=null&&isMenugroupOn==false}}" class='timu-add' bindtap='addAnswer'>
+              <text class='timu-add-icon'>+</text>
+              <text>点击添加答案</text>
+            </view> -->
+          </view>
+          <!-- <i-button style='width: 90%;bottom:0' type='success'>存入题库</i-button> -->
+          <view style='width:100vw;height:10vh;'></view>
+
+          <view style='width:100vw;height:10vh'></view>
+          <view wx:if="{{isMaskON}}" class='mask' bindtap='menuBack' data-action='none'></view>
+
+        </scroll-view>
+      </swiper-item>
+
+    </block>
+    <block>
+      <swiper-item>
+        <view>test1</view>
+      </swiper-item>
+      <swiper-item>
+        <view>我的答题</view>
+      </swiper-item>
+      <swiper-item>
+        <view>我的提问</view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!--切换内容部分end-->
+</view>
+<!-- 弹出按钮 -->
+<view wx:if="{{isMenuaddOn}}" bindtap='addAnswer'>
+  <view class="menu_add_out">
+
+    <view class="menu_add_in">
+      <image style='width:60rpx;height:60rpx;z-index=9999' src="../pic/button/i7.png"></image>
+    </view>
+
+  </view>
+</view>
+
+<!-- 按钮组 -->
+<view class="menu_group" wx:if="{{isMenugroupOn}}">
+  <view class="menu_item" wx:for="{{menuList}}" wx:key="{{index}}">
+    <view class="left">
+      <view class="menu_left">{{item}}
+      </view>
+    </view>
+    <view class="right">
+      <view class="menu_right" bindtap='menuBack' data-action='{{index}}'>
+        <image src="../pic/button/i{{index+1}}.png"></image>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,84 @@
+<wxs module='shuziGaibian' src='./shuzi.wxs'></wxs>
+<view style='background-color:white'>
+  <view class='boxTop'>
+    <view bindtap='tapShunxu' class='shunxu' style='font-size:{{fontSize_shunxu}}rpx;'>顺序</view>
+    <view bindtap='tapSuiji' class='suiji' style='font-size:{{fontSize_suiji}}rpx;'>随机</view>
+    <view bindtap='tapNixu' class='nixu' style='font-size:{{fontSize_nixu}}rpx;'>倒序</view>
+  </view>
+  <view class='bottomLine' style='left:{{bottomLineLeft}}rpx'></view>
+  <view class='box2'></view>
+
+
+
+  <view wx:for="{{quesInfo}}" wx:for-item="item" wx:key="key" style='margin-top:5vh;margin-bottom:0vh;'>
+    <view style='font-size:16px;font-weight:bold;color:black;margin-left:2vw;'>序号:{{shuziGaibian.shuzi(item.ID)}}</view>
+    <view style='background-color:white;' style=' box-shadow: 0px 0px 5px 0px black; margin-left:2vw;width:96vw;'>
+      <view>
+        <view>
+          <view>
+            <image src="{{item.src_timu}}" class='img' style='width:96vw' mode='widthFix'>
+            </image>
+          </view>
+          <view class='ques_info'>
+            <view style='width:32vw'>
+              <view class='font_color_black' style='margin-left:2VW'>{{item.zhishidian}}</view>
+            </view>
+            <view style='width:32vw;'>
+              <view style='margin-left:14vw;'>
+                <image bindtap='showHide' data-id='{{item.ID}}' class="{{showStatus[item.ID]? 'xiala':'shangla'}}" src="{{src_xiala}}" mode='widthFix'>
+                </image>
+              </view>
+            </view>
+            <view style='width:32vw;'>
+              <image src="{{src_xuanze}}" class='img_xuanze' style='width:6vw;' mode='widthFix'>
+              </image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <scroll-view scroll-y style='height: 20vh;'>
+        <view class="daan {{showStatus[item.ID]?'':'show'}}">
+          <view style='font-size:14px;padding-top:2vw;margin-left:2vw;font-weight:bold;color:gray'>解答：</view>
+          <view wx:for="{{item.daan}}" wx:for-item="itemDaan" wx:key="xuhao">
+
+            <!-- 如果type是pic，则显示图片格式 -->
+            <view wx:if="{{(itemDaan.type=='pic'&&!(itemDaan.src==''))}}">
+              <view style='width:100vw;margin-top:1vw;margin-left:0vw;'>
+                <image style='width:96vw; border-radius: 1vw;' src='{{itemDaan.src}}' mode='widthFix'></image>
+                <!-- <view style='width:100vw;height:4vw;background-color-white;'></view> -->
+              </view>
+            </view>
+            <!-- 如果type是wenzi，则显示文字格式 -->
+            <view wx:if="{{(itemDaan.type=='wenzi')}}" style='text-align:right;' class="bubble">
+
+              <view class="content">{{itemDaan.src}}
+              </view>
+              <!-- </view> -->
+              <view style='width:100vw;height:4vw;background-color-white; '></view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+<!--右下角按钮-->
+<view>
+  <view>
+    <image src="/pages/pic/collect.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>
+    <image src="/pages/pic/transpond.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>
+    <image src="/pages/pic/input.png" class="img-style" animation="{{animInput}}" bindtap="input"></image>
+    <image src="/pages/pic/plus.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>
+  </view>
+</view>

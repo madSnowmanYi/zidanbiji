@@ -1,0 +1,15 @@
+<!--pages/subject/subject.wxml-->
+<view class='blankTop'></view>
+<view class='pre'>
+  <!-- <view  > -->
+  <text class='boxLeft'>当前科目：</text>
+  <!-- </view> -->
+  <view class='line'></view>
+
+  <text class='boxRight'>{{grade}}{{subject_now}}</text>
+</view>
+<view style='height:24vh'></view>
+<view wx:for="{{subject}}" wx:key='id' wx:for-index="i">
+  <view class='blank'></view>
+  <view data-id = '{{i}}' catchtap='changeSubject' class='subject' style='{{key==i?"background-color:#11cd6e;color:white":"background-color:rgb(230, 228, 228)"}}'> {{subject[i]}}</view>
+</view>

@@ -1,0 +1,226 @@
+var camera_view_new_lastHeight = 0 //原相框高度
+var camera_view_new_newHeight = 0 //现相框高度
+var screenheight = 0 //屏幕高度
+var imagewidth = 0 //屏幕宽度
+
+// 上部sensorline数据
+var lastTop_up = 0 //上部sensorline开始高度
+var top_up = 0 //上部sensorline计算高度
+var startY = 0 //开始Y值
+var pageY = 0 //点击Y值
+
+// 中部sensorline数据
+var lastTop_middle = 0 //上部sensorline开始高度
+var top_middle = 0 //上部sensorline计算高度
+var startY_middle = 0 //开始Y值
+var pageY_middle = 0 //点击Y值
+
+// 下部sensorline数据
+var lastTop_down = 0 //下部sensorline开始高度
+var top_down = 0 //下部sensorline计算高度
+var startY_down = 0 //开始Y值
+var pageY_down = 0 //点击Y值
+
+// 初始化数据
+function chushihua(mask_top_height, imgw) {
+  lastTop_up = (mask_top_height)
+  lastTop_down = 3 * (mask_top_height)
+  lastTop_middle = (mask_top_height) + 21
+  screenheight = 4 * (mask_top_height)
+  camera_view_new_lastHeight = 2 * (mask_top_height)
+  imagewidth = imgw
+}
+
+// 上部感应线控制
+function touchstart_sensorLine_up(event, ins) {
+  var touch = event.touches[0] || event.changedTouches[0]
+  startY = touch.pageY
+}
+
+function touchmove_sensorLine_up(event, ins) {
+  console.log(event.touches[0].pageY)
+
+  var touch = event.touches[0] || event.changedTouches[0]
+  pageY = touch.pageY
+  top_up = pageY - startY + lastTop_up
+  top_middle = pageY - startY + lastTop_middle
+  camera_view_new_newHeight = camera_view_new_lastHeight - pageY + startY
+  // 设置各框线样式
+  if ((lastTop_down - top_up) > (100 / 750 * imagewidth) && (top_up > 0)&&(Math.abs(pageY-startY)>2)) {
+    ins.selectComponent('.sensorLine_top').setStyle({
+      top: top_up - 10 + 'px'
+    })
+    ins.selectComponent('.sensorLine_middle').setStyle({
+      top: top_up + 21 + 'px',
+      height: camera_view_new_newHeight - 42 + 'px'
+    })
+    ins.selectComponent('.mask_top').setStyle({
+      height: top_up + 'px'
+    })
+    ins.selectComponent('.cameraViewNew').setStyle({
+      top: top_up + 'px;',
+      height: camera_view_new_newHeight + 'px'
+    })
+    ins.selectComponent('.camera_border_new').setStyle({
+      top: top_up + 'px;',
+      height: camera_view_new_newHeight-2 + 'px'
+    })
+    ins.selectComponent('.line_vertical_new1').setStyle({
+      top: top_up + 'px;',
+      height: camera_view_new_newHeight + 'px'
+    })
+    ins.selectComponent('.line_vertical_new2').setStyle({
+      top: top_up + 'px;',
+      height: camera_view_new_newHeight + 'px'
+    })
+    ins.selectComponent('.lineHorizonNew1').setStyle({
+      top: top_up + (camera_view_new_newHeight - 2) / 3 + 'px;',
+
+    })
+    ins.selectComponent('.lineHorizonNew2').setStyle({
+      top: top_up + (camera_view_new_newHeight - 2) * 2 / 3 + 'px;',
+
+    })
+    // camera_border_new 
+    startY = pageY
+    lastTop_up = top_up
+    lastTop_middle = top_middle
+    camera_view_new_lastHeight = camera_view_new_newHeight
+  }
+}
+
+//中部感应区
+function touchstart_sensorLine_Middle(event, ins) {
+  var touch_middle = event.touches[0] || event.changedTouches[0]
+  startY_middle = touch_middle.pageY
+}
+
+
+function touchmove_sensorLine_Middle(event, ins) {
+
+  var touch_middle = event.touches[0] || event.changedTouches[0]
+  pageY_middle = touch_middle.pageY
+  lastTop_middle = lastTop_up + 21
+  top_up = pageY_middle - startY_middle + lastTop_up
+  top_middle = pageY_middle - startY_middle + lastTop_middle
+  top_down = pageY_middle - startY_middle + lastTop_down
+  camera_view_new_newHeight = camera_view_new_lastHeight
+  // 设置各框线样式
+  if ((top_up > 0) && (top_down < (screenheight * 7 / 8 - 40))) {
+    ins.selectComponent('.sensorLine_top').setStyle({
+      top: top_up + 'px'
+    })
+    ins.selectComponent('.sensorLine_middle').setStyle({
+      top: top_middle + 'px',
+      height: camera_view_new_newHeight - 42 + 'px'
+    })
+    ins.selectComponent('.sensorLine_down').setStyle({
+      top: top_down + 'px'
+    })
+    ins.selectComponent('.mask_top').setStyle({
+      height: top_middle - 21 + 'px'
+    })
+    ins.selectComponent('.mask_down').setStyle({
+      height: screenheight - top_down + 'px'
+    })
+    ins.selectComponent('.cameraViewNew').setStyle({
+      top: top_middle - 21 + 'px;',
+      height: top_down - top_up + 'px'
+    })
+    ins.selectComponent('.camera_border_new').setStyle({
+      top: top_middle - 21 + 'px;',
+      height: top_down - top_up-2 + 'px'
+    })
+    ins.selectComponent('.line_vertical_new1').setStyle({
+      top: top_middle - 21 + 'px;',
+      height: top_down - top_up + 'px'
+    })
+    ins.selectComponent('.line_vertical_new2').setStyle({
+      top: top_middle - 21 + 'px;',
+      height: top_down - top_up + 'px'
+    })
+    ins.selectComponent('.lineHorizonNew1').setStyle({
+      top: top_middle - 21 + (camera_view_new_newHeight - 2) / 3 + 'px;',
+
+    })
+    ins.selectComponent('.lineHorizonNew2').setStyle({
+      top: top_middle - 21 + (camera_view_new_newHeight - 2) * 2 / 3 + 'px;',
+
+    })
+
+    startY_middle = pageY_middle
+    lastTop_up = top_up
+    lastTop_down = top_down
+    lastTop_middle = top_middle
+    camera_view_new_lastHeight = camera_view_new_newHeight
+  }
+}
+// 下部感应线控制
+function touchstart_sensorLine_down(event, ins) {
+  var touch_down1 = event.touches[0] || event.changedTouches[0]
+  startY_down = touch_down1.pageY
+}
+
+function touchmove_sensorLine_down(event, ins) {
+ 
+  var touch_down2 = event.touches[0] || event.changedTouches[0]
+  pageY_down = touch_down2.pageY
+  top_down = pageY_down - startY_down + lastTop_down
+  camera_view_new_newHeight = camera_view_new_lastHeight + pageY_down - startY_down
+  // 设置各框线样式
+  if ((top_down - lastTop_up) > (100 / 750 * imagewidth) && (top_down < (screenheight * 7 / 8 - 40))) {
+    ins.selectComponent('.sensorLine_down').setStyle({
+      top: top_down - 10 + 'px'
+    })
+    ins.selectComponent('.sensorLine_middle').setStyle({
+      top: lastTop_up + 21 + 'px',
+      height: camera_view_new_newHeight - 40 + 'px'
+    })
+    ins.selectComponent('.mask_down').setStyle({
+      // top: 0.5*lastTop_down + 'px',
+      height: screenheight - top_down + 'px'
+    })
+    ins.selectComponent('.cameraViewNew').setStyle({
+      top: lastTop_up + 'px;',
+      height: camera_view_new_newHeight + 'px'
+    })
+    ins.selectComponent('.camera_border_new').setStyle({
+      top: lastTop_up + 'px;',
+      height: camera_view_new_newHeight-2  + 'px'
+    })
+    ins.selectComponent('.line_vertical_new1').setStyle({
+      top: lastTop_up + 'px;',
+      height: camera_view_new_newHeight + 'px'
+    })
+    ins.selectComponent('.line_vertical_new2').setStyle({
+      top: lastTop_up + 'px;',
+      height: camera_view_new_newHeight + 'px'
+    })
+    ins.selectComponent('.lineHorizonNew1').setStyle({
+      top: lastTop_up + (camera_view_new_newHeight - 2) / 3 + 'px;',
+
+    })
+    ins.selectComponent('.lineHorizonNew2').setStyle({
+      top: lastTop_up + (camera_view_new_newHeight - 2) * 2 / 3 + 'px;',
+
+    })
+
+    // camera_border_new 
+    startY_down = pageY_down
+    lastTop_down = top_down
+    camera_view_new_lastHeight = camera_view_new_newHeight
+   
+  }
+}
+
+module.exports = {
+  touchstartUp: touchstart_sensorLine_up,
+  touchmoveUp: touchmove_sensorLine_up,
+
+  touchstartDown: touchstart_sensorLine_down,
+  touchmoveDown: touchmove_sensorLine_down,
+
+  touchstartMiddle: touchstart_sensorLine_Middle,
+  touchmoveMiddle: touchmove_sensorLine_Middle,
+  chushihua: chushihua,
+}

@@ -1,0 +1,68 @@
+.content {
+  background-color: #fff;
+}
+
+.menu {
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid #f2f2f2;
+  z-index: 11;
+}
+
+.menu view {
+  margin: 0rpx auto;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: black;
+}
+
+.menu .mr {
+  border-right: 0rpx;
+}
+
+.select {
+  position: relative;
+}
+
+.select:after {
+  position: absolute;
+  left: 7rpx;
+  bottom: 0rpx;
+  content: "";
+  width: 110rpx;
+  height: 8rpx;
+  background-color: #11cd6e;
+  border-radius: 4px 4px 0 0;
+}
+
+.body {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.body .explain-box {
+  display: flex;
+  justify-content: flex-end;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+  padding: 0rpx 30rpx;
+  z-index: 12;
+}
+
+.explain-box text {
+  font-size: 32rpx;
+  color: #11cd6e;
+}
+
+.explain-box .explain {
+  margin-right: 8rpx;
+}
+
+.explain-box .icon-wenhao {
+  vertical-align: middle;
+  line-height: 82rpx;
+}

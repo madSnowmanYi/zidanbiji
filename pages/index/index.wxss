@@ -1,0 +1,115 @@
+.paizhao {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20vw;
+  margin-left: -20vw;
+  width: 40vw;
+  height: 40vw;
+  background-color: #11cd6e;
+  border-radius: 50%;
+  animation: Tada 2.25s linear infinite;
+  box-shadow: 0px 0px 5px 0px gray;
+}
+
+.subject {
+  position: absolute;
+  top: 30rpx;
+  right: -20rpx;
+  width: 200rpx;
+  height: 60rpx;
+  background: #12af61;
+  border-radius: 30rpx;
+  /* opacity: 0.3; */
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.subject1 {
+  opacity: 1;
+  width: 120rpx;
+  line-height: 0;
+}
+
+.avatar {
+  position: absolute;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  float: left;
+  left: -10rpx;
+}
+
+.wodetiku {
+  width: 250rpx;
+  height: 80rpx;
+  background: #11cd6e;
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  color: #fff;
+  letter-spacing: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  margin-left: 2vw;
+  width: 96vw;
+  height: 1px;
+  background-color: rgb(196, 194, 194);
+}
+
+.num {
+  width: 25vw;
+  height: 10vh;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: fantasy;
+  display: flex;
+  justify-content: center;
+}
+
+.num_xiao {
+  width: 25vw;
+  height: 2vh;
+  font-size: 12px;
+  /* font-weight: bold; */
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  color: gray;
+}
+
+.ico {
+  -webkit-animation: Tada 0.1s both infinite;
+  -moz-animation: Tada 0.1s both infinite;
+  -ms-animation: Tada 0.1s both infinite;
+  animation: Tada 0.1s linear infinite;
+}
+
+@keyframes Tada {
+  0% {
+    transform: scale(0.8);
+    transform: scale(0.8);
+  }/* 10% {
+    transform: scale(0.8);
+    transform: scale(0.8);
+  } */
+
+  50% {
+    transform: scale(1);
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0.8);
+    transform: scale(0.8);
+  }
+}

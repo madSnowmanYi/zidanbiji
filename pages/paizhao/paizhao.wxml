@@ -1,0 +1,109 @@
+<!--pages/paizhao/paizhao.wxml-->
+<!-- 拍照显示 -->
+<wxs module="touch" src='./paizhao.wxs'></wxs>
+
+<camera hidden='{{!isShowCamera}}' device - position="width" flash='{{flashOn==true?"on":"off"}}' style='height:100vh;z-index:1;'>
+  <!-- 相框部分 -->
+  <cover-view class='direction' style='top:0px; width: {{imagewidth}}px;height: {{mask_top_height}}px;'>
+    <cover-view>请竖屏拍照，文字与水平线齐平</cover-view>
+  </cover-view>
+  <cover-view class='camera_view' style='top:{{mask_top_height}}px; width: {{imagewidth}}px;height: {{camera_height}}px;'>
+
+    <!-- 相框四周线条单独列出一个view，避免出现缝隙 -->
+    <cover-view class='camera_border' style='width: {{imagewidth-2}}px;height: {{camera_height-2}}px;'>
+    </cover-view>
+    <!-- 摄像头内两条垂直线 -->
+    <cover-view class="line_vertical" style='top:0.2px; left:{{imagewidth/3}}px; width: {{(imagewidth-2)/3-0.4}}px;height: {{camera_height+0.5}}px;'></cover-view>
+    <!-- 摄像头内两条水平线 -->
+    <cover-view class="line_horizon" style='top:{{(camera_height-2)/3}}px; left:-0.2px; height:{{(camera_height-2)/3}}px;width:{{imagewidth+0.5}}px;'>
+    </cover-view>
+  </cover-view>
+  <!-- 底部遮罩层暗 -->
+  <cover-view class='mask_bottom' style='height:{{mask_bottom_height}}px;'></cover-view>
+  <cover-view class='camerabotton' style='bottom:{{isIphoneX==true?"75px":"10px"}}'>
+    <!-- 闪光灯 -->
+    <cover-view class='flash' bindtap='flash'>
+      <cover-image src='{{flashOn==true?"../pic/shanguangdengdakai.png":"../pic/shanguangdengguanbi.png"}}'></cover-image>
+    </cover-view>
+  
+    <!-- 画两个圆作拍照按钮 -->
+    <cover-view class='takephoto' bindtap='takePhotoAction'>
+      <cover-view class='takephoto_child'>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+    <cover-view class='quxiao' bindtap='quxiao'>
+      <cover-image src='../pic/quxiao.png'></cover-image>
+    </cover-view>
+</camera>
+
+
+
+
+
+<!-- 裁剪页 -->
+<image hidden='{{!isShowImage}}' src='{{imagePath}}' class='image'>
+  <!-- 相框上部遮罩层，暗 -->
+  <view class='mask_top' style='height:{{mask_top_height}}px;'></view>
+  <!-- 文字提示 -->
+  <view class='direction' style='top:0px; width: {{imagewidth}}px;height: {{mask_top_height}}px;'>
+    <view>上下滑动滑块，调整照片高度</view>
+  </view>
+  <!-- 相框部分 -->
+  <view class='cameraViewNew' style='top:{{mask_top_height}}px; width: {{imagewidth}}px;height: {{camera_height}}px;'>
+
+    <!-- 摄像头四个角 -->
+    <view class="boder-left-top1"></view>
+    <view class="boder-right-top1"></view>
+    <view class="boder-left-top2"></view>
+    <view class="boder-right-top2"></view>
+    <view class="boder-left-bottom1"></view>
+    <view class="boder-right-bottom1"></view>
+    <view class="boder-left-bottom2"></view>
+    <view class="boder-right-bottom2"></view>
+    <!-- 中间上下连个滑块 -->
+    <view class="boder-middle-top" style='left:330rpx'></view>
+    <view class="boder-middle-bottom" style='left:330rpx'></view>
+  </view>
+
+  <!-- 相框四周线条单独列出一个view，避免出现缝隙 -->
+  <view id='camera_border_new' class='camera_border_new' style='top:{{mask_top_height}}px; width: {{imagewidth-2}}px;height: {{camera_height-2}}px;'></view>
+  <!-- 摄像头内两条垂直线 -->
+  <view class="line_vertical_new1" style='top:{{mask_top_height}}px; margin-left:{{imagewidth/3}}px; width: 1px;height: {{camera_height-1}}px;'></view>
+  <view class="line_vertical_new2" style='top:{{mask_top_height}}px; margin-left:{{imagewidth*2/3}}px; width: 1px;height: {{camera_height-1}}px;'></view>
+  <!-- 摄像头内两条水平线 -->
+  <view class="lineHorizonNew1" style='top:{{(camera_height-2)/3+mask_top_height}}px; left:-0.2px; height:1px;width:{{imagewidth+0.5}}px'>
+  </view>
+  <view class="lineHorizonNew2" style='top:{{(camera_height-2)*2/3+mask_top_height}}px; left:-0.2px; height:1px;width:{{imagewidth+0.5}}px;'>
+  </view>
+
+  <!-- 底部遮罩层暗 -->
+  <view class='mask_down' style='height:{{mask_bottom_height}}px;'>
+  </view>
+  <!-- 确定按钮 -->
+  <view bindtap='cutPhoto' class='cutphoto' style='bottom:{{imageheight/8-30}}px;left:{{imagewidth/2-30}}px'>
+    <view class='duigou'></view>
+  </view>
+  <view class='quxiao2' bindtap='quxiao_2'>
+    <cover-image src='../pic/quxiao.png'></cover-image>
+  </view>
+</image>
+<!-- sensorline-top -->
+<view hidden='{{!isShowImage}}' change:thevalue='{{touch.chushihua(mask_top_height,imagewidth)}}' data-id='{{mask_top_height}}' bindtouchstart='{{touch.touchstartUp}}' bindtouchmove='{{touch.touchmoveUp}}' class="sensorLine_top" style='top:{{mask_top_height-10}}px;height:30px;width: {{imagewidth}}px;'>
+</view>
+
+
+<!-- sensorline-middle -->
+<view hidden='{{!isShowImage}}' bindtouchstart='{{touch.touchstartMiddle}}' bindtouchmove='{{touch.touchmoveMiddle}}' class="sensorLine_middle" style='top:{{mask_top_height+21}}px;height:{{camera_height-42}}px;width: {{imagewidth}}px;'>
+
+
+</view>
+<!-- sensorline-down -->
+<view hidden='{{!isShowImage}}' bindtouchstart='{{touch.touchstartDown}}' bindtouchmove='{{touch.touchmoveDown}}' class="sensorLine_down" style='top:{{3*mask_top_height-10}}px;height:30px;width: {{imagewidth}}px;'>
+</view>
+
+<image mode='aspectFit' wx:if='{{isShowNewImage}}' src='{{imagePath1}}'></image>
+
+
+
+<canvas hidden='{{!isShowCanvas}}' canvas-id="image-canvas" style='width:100vw;height:100vh'></canvas>
